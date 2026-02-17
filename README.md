@@ -3,7 +3,7 @@
 ## Prerequisites
 
 ### PHP Version Support
-- **Supported**: To run the SDK you need PHP version 8.1 or higher.
+- **Supported**: To run the SDK you need PHP version 8.4.
 
 ## Setup Instructions
 
