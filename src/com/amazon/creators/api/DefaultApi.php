@@ -218,10 +218,17 @@ class DefaultApi
         // Get OAuth2 token (creates/recreates token manager if needed)
         $token = $this->getOrCreateTokenManager()->getToken();
         
-        // Build OAuth2 headers
-        $oauthHeaders = [
-            'Authorization' => "Bearer {$token}, Version {$this->config->getVersion()}"
-        ];
+        // Build OAuth2 headers - Version suffix only for v2.x (Cognito)
+        $version = $this->config->getVersion();
+        if (str_starts_with($version, "3.")) {
+            $oauthHeaders = [
+                'Authorization' => "Bearer {$token}"
+            ];
+        } else {
+            $oauthHeaders = [
+                'Authorization' => "Bearer {$token}, Version {$version}"
+            ];
+        }
         
         return $oauthHeaders;
     }
