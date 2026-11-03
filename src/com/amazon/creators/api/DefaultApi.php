@@ -218,17 +218,10 @@ class DefaultApi
         // Get OAuth2 token (creates/recreates token manager if needed)
         $token = $this->getOrCreateTokenManager()->getToken();
         
-        // Build OAuth2 headers - Version suffix only for v2.x (Cognito)
-        $version = $this->config->getVersion();
-        if (str_starts_with($version, "3.")) {
-            $oauthHeaders = [
-                'Authorization' => "Bearer {$token}"
-            ];
-        } else {
-            $oauthHeaders = [
-                'Authorization' => "Bearer {$token}, Version {$version}"
-            ];
-        }
+        // Build OAuth2 headers
+        $oauthHeaders = [
+            'Authorization' => "Bearer {$token}, Version {$this->config->getVersion()}"
+        ];
         
         return $oauthHeaders;
     }
@@ -551,7 +544,7 @@ class DefaultApi
         if (isset($getBrowseNodesRequestContent)) {
             if (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \json_encode(ObjectSerializer::sanitizeForSerialization($getBrowseNodesRequestContent), \JSON_THROW_ON_ERROR);
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($getBrowseNodesRequestContent));
             } else {
                 $httpBody = $getBrowseNodesRequestContent;
             }
@@ -572,7 +565,7 @@ class DefaultApi
 
             } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the form parameters
-                $httpBody = \json_encode($formParams, \JSON_THROW_ON_ERROR);
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
             } else {
                 // for HTTP post (form)
                 $httpBody = ObjectSerializer::buildQuery($formParams);
@@ -920,7 +913,7 @@ class DefaultApi
         if (isset($getFeedRequestContent)) {
             if (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \json_encode(ObjectSerializer::sanitizeForSerialization($getFeedRequestContent), \JSON_THROW_ON_ERROR);
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($getFeedRequestContent));
             } else {
                 $httpBody = $getFeedRequestContent;
             }
@@ -941,7 +934,7 @@ class DefaultApi
 
             } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the form parameters
-                $httpBody = \json_encode($formParams, \JSON_THROW_ON_ERROR);
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
             } else {
                 // for HTTP post (form)
                 $httpBody = ObjectSerializer::buildQuery($formParams);
@@ -1289,7 +1282,7 @@ class DefaultApi
         if (isset($getItemsRequestContent)) {
             if (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \json_encode(ObjectSerializer::sanitizeForSerialization($getItemsRequestContent), \JSON_THROW_ON_ERROR);
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($getItemsRequestContent));
             } else {
                 $httpBody = $getItemsRequestContent;
             }
@@ -1310,7 +1303,7 @@ class DefaultApi
 
             } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the form parameters
-                $httpBody = \json_encode($formParams, \JSON_THROW_ON_ERROR);
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
             } else {
                 // for HTTP post (form)
                 $httpBody = ObjectSerializer::buildQuery($formParams);
@@ -1658,7 +1651,7 @@ class DefaultApi
         if (isset($getReportRequestContent)) {
             if (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \json_encode(ObjectSerializer::sanitizeForSerialization($getReportRequestContent), \JSON_THROW_ON_ERROR);
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($getReportRequestContent));
             } else {
                 $httpBody = $getReportRequestContent;
             }
@@ -1679,7 +1672,7 @@ class DefaultApi
 
             } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the form parameters
-                $httpBody = \json_encode($formParams, \JSON_THROW_ON_ERROR);
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
             } else {
                 // for HTTP post (form)
                 $httpBody = ObjectSerializer::buildQuery($formParams);
@@ -2027,7 +2020,7 @@ class DefaultApi
         if (isset($getVariationsRequestContent)) {
             if (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \json_encode(ObjectSerializer::sanitizeForSerialization($getVariationsRequestContent), \JSON_THROW_ON_ERROR);
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($getVariationsRequestContent));
             } else {
                 $httpBody = $getVariationsRequestContent;
             }
@@ -2048,7 +2041,7 @@ class DefaultApi
 
             } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the form parameters
-                $httpBody = \json_encode($formParams, \JSON_THROW_ON_ERROR);
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
             } else {
                 // for HTTP post (form)
                 $httpBody = ObjectSerializer::buildQuery($formParams);
@@ -2398,7 +2391,7 @@ class DefaultApi
 
             } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the form parameters
-                $httpBody = \json_encode($formParams, \JSON_THROW_ON_ERROR);
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
             } else {
                 // for HTTP post (form)
                 $httpBody = ObjectSerializer::buildQuery($formParams);
@@ -2748,7 +2741,7 @@ class DefaultApi
 
             } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the form parameters
-                $httpBody = \json_encode($formParams, \JSON_THROW_ON_ERROR);
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
             } else {
                 // for HTTP post (form)
                 $httpBody = ObjectSerializer::buildQuery($formParams);
@@ -2782,14 +2775,14 @@ class DefaultApi
      * Operation searchItems
      *
      * @param  string $xMarketplace Target Amazon Locale. (required)
-     * @param  \Amazon\CreatorsAPI\v1\com\amazon\creators\model\SearchItemsRequestContent|null $searchItemsRequestContent searchItemsRequestContent (optional)
+     * @param  \Amazon\CreatorsAPI\v1\com\amazon\creators\model\SearchItemsRequestContent $searchItemsRequestContent searchItemsRequestContent (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['searchItems'] to see the possible values for this operation
      *
      * @throws \Amazon\CreatorsAPI\v1\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return \Amazon\CreatorsAPI\v1\com\amazon\creators\model\SearchItemsResponseContent|\Amazon\CreatorsAPI\v1\com\amazon\creators\model\ValidationExceptionResponseContent|\Amazon\CreatorsAPI\v1\com\amazon\creators\model\UnauthorizedExceptionResponseContent|\Amazon\CreatorsAPI\v1\com\amazon\creators\model\AccessDeniedExceptionResponseContent|\Amazon\CreatorsAPI\v1\com\amazon\creators\model\ResourceNotFoundExceptionResponseContent|\Amazon\CreatorsAPI\v1\com\amazon\creators\model\ThrottleExceptionResponseContent|\Amazon\CreatorsAPI\v1\com\amazon\creators\model\InternalServerExceptionResponseContent
      */
-    public function searchItems($xMarketplace, $searchItemsRequestContent = null, string $contentType = self::contentTypes['searchItems'][0])
+    public function searchItems($xMarketplace, $searchItemsRequestContent, string $contentType = self::contentTypes['searchItems'][0])
     {
         list($response) = $this->searchItemsWithHttpInfo($xMarketplace, $searchItemsRequestContent, $contentType);
         return $response;
@@ -2799,14 +2792,14 @@ class DefaultApi
      * Operation searchItemsWithHttpInfo
      *
      * @param  string $xMarketplace Target Amazon Locale. (required)
-     * @param  \Amazon\CreatorsAPI\v1\com\amazon\creators\model\SearchItemsRequestContent|null $searchItemsRequestContent (optional)
+     * @param  \Amazon\CreatorsAPI\v1\com\amazon\creators\model\SearchItemsRequestContent $searchItemsRequestContent (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['searchItems'] to see the possible values for this operation
      *
      * @throws \Amazon\CreatorsAPI\v1\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of \Amazon\CreatorsAPI\v1\com\amazon\creators\model\SearchItemsResponseContent|\Amazon\CreatorsAPI\v1\com\amazon\creators\model\ValidationExceptionResponseContent|\Amazon\CreatorsAPI\v1\com\amazon\creators\model\UnauthorizedExceptionResponseContent|\Amazon\CreatorsAPI\v1\com\amazon\creators\model\AccessDeniedExceptionResponseContent|\Amazon\CreatorsAPI\v1\com\amazon\creators\model\ResourceNotFoundExceptionResponseContent|\Amazon\CreatorsAPI\v1\com\amazon\creators\model\ThrottleExceptionResponseContent|\Amazon\CreatorsAPI\v1\com\amazon\creators\model\InternalServerExceptionResponseContent, HTTP status code, HTTP response headers (array of strings)
      */
-    public function searchItemsWithHttpInfo($xMarketplace, $searchItemsRequestContent = null, string $contentType = self::contentTypes['searchItems'][0])
+    public function searchItemsWithHttpInfo($xMarketplace, $searchItemsRequestContent, string $contentType = self::contentTypes['searchItems'][0])
     {
         $request = $this->searchItemsRequest($xMarketplace, $searchItemsRequestContent, $contentType);
 
@@ -2967,13 +2960,13 @@ class DefaultApi
      * Operation searchItemsAsync
      *
      * @param  string $xMarketplace Target Amazon Locale. (required)
-     * @param  \Amazon\CreatorsAPI\v1\com\amazon\creators\model\SearchItemsRequestContent|null $searchItemsRequestContent (optional)
+     * @param  \Amazon\CreatorsAPI\v1\com\amazon\creators\model\SearchItemsRequestContent $searchItemsRequestContent (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['searchItems'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function searchItemsAsync($xMarketplace, $searchItemsRequestContent = null, string $contentType = self::contentTypes['searchItems'][0])
+    public function searchItemsAsync($xMarketplace, $searchItemsRequestContent, string $contentType = self::contentTypes['searchItems'][0])
     {
         return $this->searchItemsAsyncWithHttpInfo($xMarketplace, $searchItemsRequestContent, $contentType)
             ->then(
@@ -2987,13 +2980,13 @@ class DefaultApi
      * Operation searchItemsAsyncWithHttpInfo
      *
      * @param  string $xMarketplace Target Amazon Locale. (required)
-     * @param  \Amazon\CreatorsAPI\v1\com\amazon\creators\model\SearchItemsRequestContent|null $searchItemsRequestContent (optional)
+     * @param  \Amazon\CreatorsAPI\v1\com\amazon\creators\model\SearchItemsRequestContent $searchItemsRequestContent (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['searchItems'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function searchItemsAsyncWithHttpInfo($xMarketplace, $searchItemsRequestContent = null, string $contentType = self::contentTypes['searchItems'][0])
+    public function searchItemsAsyncWithHttpInfo($xMarketplace, $searchItemsRequestContent, string $contentType = self::contentTypes['searchItems'][0])
     {
         $returnType = '\Amazon\CreatorsAPI\v1\com\amazon\creators\model\SearchItemsResponseContent';
         $request = $this->searchItemsRequest($xMarketplace, $searchItemsRequestContent, $contentType);
@@ -3038,13 +3031,13 @@ class DefaultApi
      * Create request for operation 'searchItems'
      *
      * @param  string $xMarketplace Target Amazon Locale. (required)
-     * @param  \Amazon\CreatorsAPI\v1\com\amazon\creators\model\SearchItemsRequestContent|null $searchItemsRequestContent (optional)
+     * @param  \Amazon\CreatorsAPI\v1\com\amazon\creators\model\SearchItemsRequestContent $searchItemsRequestContent (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['searchItems'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function searchItemsRequest($xMarketplace, $searchItemsRequestContent = null, string $contentType = self::contentTypes['searchItems'][0])
+    public function searchItemsRequest($xMarketplace, $searchItemsRequestContent, string $contentType = self::contentTypes['searchItems'][0])
     {
 
         // verify the required parameter 'xMarketplace' is set
@@ -3060,6 +3053,12 @@ class DefaultApi
             throw new \InvalidArgumentException("invalid value for \"xMarketplace\" when calling DefaultApi.searchItems, must conform to the pattern /.*\\S.*/.");
         }
         
+        // verify the required parameter 'searchItemsRequestContent' is set
+        if ($searchItemsRequestContent === null || (is_array($searchItemsRequestContent) && count($searchItemsRequestContent) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $searchItemsRequestContent when calling searchItems'
+            );
+        }
 
 
         $resourcePath = '/catalog/v1/searchItems';
@@ -3090,7 +3089,7 @@ class DefaultApi
         if (isset($searchItemsRequestContent)) {
             if (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \json_encode(ObjectSerializer::sanitizeForSerialization($searchItemsRequestContent), \JSON_THROW_ON_ERROR);
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($searchItemsRequestContent));
             } else {
                 $httpBody = $searchItemsRequestContent;
             }
@@ -3111,7 +3110,7 @@ class DefaultApi
 
             } elseif (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the form parameters
-                $httpBody = \json_encode($formParams, \JSON_THROW_ON_ERROR);
+                $httpBody = \GuzzleHttp\Utils::jsonEncode($formParams);
             } else {
                 // for HTTP post (form)
                 $httpBody = ObjectSerializer::buildQuery($formParams);
