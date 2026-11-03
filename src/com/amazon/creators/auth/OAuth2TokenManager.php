@@ -150,8 +150,9 @@ class OAuth2TokenManager
             $this->clearToken();
             
             $errorMessage = 'Failed to refresh OAuth2 token: ' . $e->getMessage();
-            if ($e->hasResponse()) {
-                $errorBody = $e->getResponse()->getBody()->getContents();
+            $errorResponse = method_exists($e, 'getResponse') ? $e->getResponse() : null;
+            if ($errorResponse) {
+                $errorBody = (string) $errorResponse->getBody();
                 $errorMessage .= ' Response: ' . $errorBody;
             }
             
