@@ -263,11 +263,12 @@ class DefaultApi
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
+                $errorResponse = method_exists($e, 'getResponse') ? $e->getResponse() : null;
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     (int) $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                    $errorResponse ? $errorResponse->getHeaders() : null,
+                    $errorResponse ? (string) $errorResponse->getBody() : null
                 );
             } catch (ConnectException $e) {
                 throw new ApiException(
@@ -632,11 +633,12 @@ class DefaultApi
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
+                $errorResponse = method_exists($e, 'getResponse') ? $e->getResponse() : null;
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     (int) $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                    $errorResponse ? $errorResponse->getHeaders() : null,
+                    $errorResponse ? (string) $errorResponse->getBody() : null
                 );
             } catch (ConnectException $e) {
                 throw new ApiException(
@@ -1001,11 +1003,12 @@ class DefaultApi
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
+                $errorResponse = method_exists($e, 'getResponse') ? $e->getResponse() : null;
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     (int) $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                    $errorResponse ? $errorResponse->getHeaders() : null,
+                    $errorResponse ? (string) $errorResponse->getBody() : null
                 );
             } catch (ConnectException $e) {
                 throw new ApiException(
@@ -1370,11 +1373,12 @@ class DefaultApi
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
+                $errorResponse = method_exists($e, 'getResponse') ? $e->getResponse() : null;
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     (int) $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                    $errorResponse ? $errorResponse->getHeaders() : null,
+                    $errorResponse ? (string) $errorResponse->getBody() : null
                 );
             } catch (ConnectException $e) {
                 throw new ApiException(
@@ -1739,11 +1743,12 @@ class DefaultApi
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
+                $errorResponse = method_exists($e, 'getResponse') ? $e->getResponse() : null;
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     (int) $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                    $errorResponse ? $errorResponse->getHeaders() : null,
+                    $errorResponse ? (string) $errorResponse->getBody() : null
                 );
             } catch (ConnectException $e) {
                 throw new ApiException(
@@ -2106,11 +2111,12 @@ class DefaultApi
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
+                $errorResponse = method_exists($e, 'getResponse') ? $e->getResponse() : null;
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     (int) $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                    $errorResponse ? $errorResponse->getHeaders() : null,
+                    $errorResponse ? (string) $errorResponse->getBody() : null
                 );
             } catch (ConnectException $e) {
                 throw new ApiException(
@@ -2456,11 +2462,12 @@ class DefaultApi
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
+                $errorResponse = method_exists($e, 'getResponse') ? $e->getResponse() : null;
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     (int) $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                    $errorResponse ? $errorResponse->getHeaders() : null,
+                    $errorResponse ? (string) $errorResponse->getBody() : null
                 );
             } catch (ConnectException $e) {
                 throw new ApiException(
@@ -2808,11 +2815,12 @@ class DefaultApi
             try {
                 $response = $this->client->send($request, $options);
             } catch (RequestException $e) {
+                $errorResponse = method_exists($e, 'getResponse') ? $e->getResponse() : null;
                 throw new ApiException(
                     "[{$e->getCode()}] {$e->getMessage()}",
                     (int) $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                    $errorResponse ? $errorResponse->getHeaders() : null,
+                    $errorResponse ? (string) $errorResponse->getBody() : null
                 );
             } catch (ConnectException $e) {
                 throw new ApiException(
